@@ -9,6 +9,7 @@ app.use(express.json());
 const users = [];
 let userId = 1;
 const questions = [{
+  id: 1,
   title: "Two states",
   description: "Given an array, return the max of the array",
   testCases: [{
@@ -23,10 +24,16 @@ function findUser(email) {
   return users.find((user) => user.email === email);
 }
 
+/**
+ * Main page
+ */
 app.get('/', (req, res) => {
   res.sendFile('E:/VS Workspace/express-backend-app/leetcode-clone/html/index.html');
 })
 
+/**
+ * Signup route
+ */
 app.post('/signup', (req, res) => {
   const data = req.body;
   // Check if user already exists
@@ -42,6 +49,9 @@ app.post('/signup', (req, res) => {
   res.send("Signup successful!");
 })
 
+/**
+ * Login route
+ */
 app.post('/login', (req, res) => {
   const data = req.body;
   const user = users.find((u) => u.email === data.email);
@@ -50,16 +60,24 @@ app.post('/login', (req, res) => {
     return res.status(404).send(`User ${data.email} not found!`);
   }
 
+  // Match password
   return (data.password === user.password) ? res.send("Login successful!") : res.status(403).send("Invalid login credentials!");
 })
 
+/**
+ * Get questions route
+ */
 app.get('/questions', (req, res) => {
   // Return the user all the questions in the questions array
-  res.send('List of questions')
+  res.send(questions);
 })
 
+/**
+ * Get user submissions route
+ */
 app.get('/submissions', (req, res) => {
-  // Return the users submissions for this  problem
+  // Return the users submissions for this problem
+
   res.send('List of submissions')
 })
 
