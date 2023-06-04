@@ -24,7 +24,7 @@ function findUser(email) {
 }
 
 app.get('/', (req, res) => {
-  res.sendFile('E:/VS Workspace/express-backend-app/html/index.html');
+  res.sendFile('E:/VS Workspace/express-backend-app/leetcode-clone/html/index.html');
 })
 
 app.post('/signup', (req, res) => {
