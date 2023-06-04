@@ -43,20 +43,14 @@ app.post('/signup', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-  // Add logic to decode body
-  // body should have email and password
   const data = req.body;
-  // Check if the user with the given email exists in the USERS array
   const user = users.find((u) => u.email === data.email);
   // If user does not exist
   if(!user) {
-    res.status(404).send(`User ${data.email} not found!`);
+    return res.status(404).send(`User ${data.email} not found!`);
   }
-  // Also ensure that the password is the same
 
-  // If the password is the same, return 200 status code to the client
-  // If the password doesn't match, return 401 unauthorized to the client
-  res.send('Login here!')
+  return (data.password === user.password) ? res.send("Login successful!") : res.status(403).send("Invalid login credentials!");
 })
 
 app.get('/questions', (req, res) => {
